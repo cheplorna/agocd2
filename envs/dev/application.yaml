@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dev-app
+  name: nginx-app
   namespace: argocd
   annotations:
      argocd-image-updater.argoproj.io/image-list: nginx=357415106205.dkr.ecr.us-east-1.amazonaws.com/test

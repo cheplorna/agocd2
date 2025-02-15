@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev-app
+  namespace: argocd
+  finalizers:
+  - resource-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    path: ens/dev
+    repoURL: https://github.com/cheplorna/agocd2.git
+    targetRevision: main
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      allowEmpty: false
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
