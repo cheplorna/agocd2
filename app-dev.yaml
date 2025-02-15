@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ens/dev
+    path: envs/dev
     repoURL: https://github.com/cheplorna/agocd2.git
     targetRevision: main
     directory:

@@ -6,7 +6,8 @@ metadata:
   annotations:
      argocd-image-updater.argoproj.io/image-list: nginx=357415106205.dkr.ecr.us-east-1.amazonaws.com/test
      argocd-image-updater.argoproj.io/nginx.update-strategy: semver
-     argocd-image-updater.argoproj.io/write-back-method: git
+     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/updater-key
+     argocd-image-updater.argoproj.io/git-branch: main
   finalizers:
   - resource-finalizer.argocd.argoproj.io
 spec:
