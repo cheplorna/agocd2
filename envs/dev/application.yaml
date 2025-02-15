@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev-app
+  namespace: argocd
+  annotations:
+     argocd-image-updater.argoproj.io/image-list: nginx=357415106205.dkr.ecr.us-east-1.amazonaws.com/test
+     argocd-image-updater.argoproj.io/nginx.update-strategy: semver
+     argocd-image-updater.argoproj.io/write-back-method: git
+  finalizers:
+  - resource-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      parameters:
+      - name: image.repository
+        value: 357415106205.dkr.ecr.us-east-1.amazonaws.com/test
+      - name: image.tag
+        value: 0.1.0
+    path: helm-charts/nginx
+    repoURL: https://github.com/cheplorna/agocd2.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      allowEmpty: false
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
