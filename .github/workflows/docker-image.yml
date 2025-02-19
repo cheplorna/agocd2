@@ -16,7 +16,7 @@ on:
         default: snapshot-artifact
       github_iam_role:
         description: Name of the IAM Role for adding access to ECR repo
-        default: "github-actions-role"
+        default: "GitHubAction-AssumeRoleWithAction"
         type: string
       aws_account_id:
         description: AWS Account ID
