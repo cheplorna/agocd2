@@ -25,7 +25,8 @@ on:
         description: Target AWS Region
         default: "us-east-1"
         type: string
-
+env:
+  AWS_REGION : "us-east-1"
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -44,8 +45,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::${{ inputs.aws_account_id }}:role/github-actions-role
-          aws-region: ${{ inputs.aws_region }}
+          role-to-assume: arn:aws:iam::arn:aws:iam::357415106205:role/GitHubAction-AssumeRoleWithAction
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
         id: login-ecr
